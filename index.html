@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+        <script src="js/niveles.js"></script>
+        <script src="js/game.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/estilo.css">
+		<link rel="shortcut icon" href="favicon.png">
+    </head>
+
+    <body onload="startGame()">
+    <div class="imagenes">
+        <img id="naranja" src="img/bloque_naranja.png" alt="bloque rojo">
+        <img id="amarillo" src="img/bloque_amarillo.png" alt="bloque amarillo">
+        <img id="azul" src="img/bloque_azul.png" alt="bloque azul">
+        <img id="gris" src="img/bloque_gris.png" alt="bloque gris">
+        <img id="verde" src="img/bloque_verde.png" alt="bloque verde">
+        <img id="violeta" src="img/bloque_violeta.png" alt="bloque violeta">
+        <img id="muro_h" src="img/muro_h.png" alt="muro horizontal">
+        <img id="muro_v" src="img/muro_v.png" alt="muro vertical">
+        <img id="barra" src="img/barra.png" alt="barra">
+        <img id="barra_corta" src="img/barra_corta.png" alt="barra corta">
+        <img id="barra_larga" src="img/barra_larga.png" alt="barra larga">
+        <img id="pelota" src="img/pelota.png" alt="pelota">
+        <img id="estrella_gris" src="img/estrella_gris.png" alt="estrella gris">
+        <img id="estrella_azul" src="img/estrella_azul.png" alt="estrella azul">
+        <img id="estrella_amarillo" src="img/estrella_amarillo.png" alt="estrella amarillo">
+        <img id="estrella_naranja" src="img/estrella_naranja.png" alt="estrella naranja">
+        <img id="estrella_verde" src="img/estrella_verde.png" alt="estrella verde">
+        <img id="estrella_violeta" src="img/estrella_violeta.png" alt="estrella violeta">
+        <img id="estrella_explota" src="img/estrella_explota.png" alt="estrella explota">
+        <img id="estrella_blanca" src="img/estrella_blanca.png" alt="estrella blanca">
+        <img id="explota" src="img/bloque_explota.png" alt="bloque explotando">
+    </div>
+	<div id="preload"></div>
+		<table id="contenedor">
+			<tr>
+				<td id="cabecera">
+					<table id="tablaCabecera">
+						<tr>
+							<td class="tituloChico">ESTRELLAS</td>
+							<td class="tituloChico">PUNTOS</td>
+							<td class="tituloChico">VIDAS</td>
+						</tr>
+						<tr>
+							<td id="txtEstrellas">0/5</td>
+							<td id="txtPuntos">0</td>
+							<td id="txtVidas">3</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td id="areaJuego" align="center">
+					<table id="menuInicio">
+						<tr>
+							<td colspan="3"><div id="logoInicio"><img src="img/logo2.png"></div></td>
+						</tr>
+						<tr class="contenedorBotones">
+							<td><div class="boton" onclick="empezar()" ontouchstart="empezar()">Empezar</div></td>
+						</tr>
+						<tr class="contenedorBotones">
+							<td><div class="boton" onclick="mostrarInstrucciones()" ontouchstart="mostrarInstrucciones()">Instrucciones</div></td>
+						</tr>
+						<tr class="contenedorBotones">
+							<td><div class="boton" onclick="location.href='../index.html'"  ontouchstart="location.href='../index.html'">Salir</div></td>
+						</tr>
+					</table>
+					<table id="menuPausa">
+						<tr>
+							<td colspan="3"><div id="textoMenu">PAUSADO</div></td>
+						</tr>
+						<tr class="contenedorBotones">
+							<td><div class="boton" onclick="reanudar()" ontouchstart="reanudar()">Reanudar</div></td>
+						</tr>
+						<tr class="contenedorBotones">
+							<td><div class="boton" onclick="reiniciar()" ontouchstart="reiniciar()">Reiniciar</div></td>
+						</tr>
+						<tr class="contenedorBotones">
+							<td><div class="boton" onclick="mostrarInstrucciones()" ontouchstart="mostrarInstrucciones()">Instrucciones</div></td>
+						</tr>
+						<tr class="contenedorBotones">
+							<td><div class="boton" onclick="location.href='../index.html'" ontouchstart="location.href='../index.html'">Salir</div></td>
+						</tr>
+					</table>
+					<div id="guardar"></div>
+					<div id="instrucciones">
+						<h3>INSTRUCCIONES </h3>
+						<table id="tablaInstrucciones" cellPadding="0">
+							<tr>
+								<td>
+									<img id="imgPad" src="img/pad.png">
+								</td>
+								<td align="left">
+									Usa las flechas del teclado o presiona los botones de direccion para moverte
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<img id="imgEstrella" src="img/estrella_violeta.png">
+								</td>
+								<td align="left">
+									Atrapa las estrellas de colores para sumar mas puntos y conseguir vidas extra, <br>
+									las estrellas blancas permiten agrandar el deslizador
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<img id="imgPelota" src="img/pelota.png">
+								</td>
+								<td align="left">
+									No dejes caer la pelota
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<img id="imgHuevo" src="img/huevo.png"> 
+								</td>
+								<td align="left">
+									Evita colisionar con los bloques de vidrio que caen
+								</td>
+							</tr>
+							
+							<tr>
+								<td></td>
+								<td align="left">
+									Presiona la tecla <strong>SPACE</strong> o toca la pantalla para pausar
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td align="left">
+									Presiona <strong>ENTER</strong> para reanudar
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td align="left">
+									Presiona <strong>ENTER</strong> o tocala pantalla para empezar
+								</td>
+							</tr>
+						</table>
+						<br>
+						<div class="boton" onclick="volver()" ontouchstart="volver()">Volver</div>
+					</div>
+					<div id="gameOver">
+						<br><br><br><br>
+						<br><br><br><br>
+						<h2 id="textoGameOver" align="center">GAME OVER</h2>
+						<h3 id="subTextoGameOver" align="center"></h3>
+						<br><br><br><br>
+						<br><br><br><br>
+						<div class="boton" onclick="inicio()" ontouchstart="inicio()">Volver al menu principal</div>
+					</div>
+					<div id="transparente" align="center" onclick="pausa()" ontouchstart="pausa()">
+						<canvas id="juego"></canvas>
+					</div>
+					
+				</td>
+			</tr>
+			<tr>
+				<td id="contenedorBotonera" align="center">
+					<div id="botonera">
+						<table id="tablaBotones" cellPadding="0">
+							<tr>
+								<td class="botonDos">
+									<div  id="botonIzquierda" class="botonDireccion" onmousedown="moverIzquierda(event)" onmouseup="parar(event)" ontouchstart="moverIzquierda(event)" ontouchend="parar(event)"></div>
+								</td>
+								<td class="botonDos">
+									<div  id="botonDerecha" class="botonDireccion" onmousedown="moverDerecha(event)" onmouseup="parar(event)" ontouchstart="moverDerecha(event)" ontouchend="parar(event)"></div>
+								</td>
+							</tr>
+							<tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>		
+    </body>
+
+</html>
